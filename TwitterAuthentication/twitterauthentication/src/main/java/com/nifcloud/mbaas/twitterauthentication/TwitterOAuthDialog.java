@@ -56,7 +56,12 @@ public class TwitterOAuthDialog {
         mOAuthRequestToken = new OAuthRequestToken() {
             @Override
             public void success(String authenticationURL) {
-                buildDialog(authenticationURL);
+                if (authenticationURL != null) {
+                    buildDialog(authenticationURL);
+                } else {
+                    mOnTwitterOAuth.failure("Get OAuth request token is null.");
+                }
+
             }
 
             @Override
@@ -77,7 +82,11 @@ public class TwitterOAuthDialog {
             } catch (TwitterException e) {
                 mOAuthRequestToken.failure(e.getErrorMessage());
             }
-            return mRequestToken.getAuthenticationURL();
+            String authenticationURL = null;
+            if (mRequestToken != null) {
+                authenticationURL = mRequestToken.getAuthenticationURL();
+            }
+            return authenticationURL;
         }
 
         @Override
