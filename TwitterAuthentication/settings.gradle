@@ -1,0 +1,3 @@
+rootProject.name='TwitterAuthentication'
+include ':app'
+include ':twitterauthentication'
