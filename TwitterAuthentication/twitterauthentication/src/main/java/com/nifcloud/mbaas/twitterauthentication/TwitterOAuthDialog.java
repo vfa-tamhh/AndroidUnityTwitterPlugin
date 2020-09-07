@@ -34,7 +34,7 @@ public class TwitterOAuthDialog {
     private String mCalbackUrl;
 
     public interface OnTwitterOAuth {
-        public void success(long id, String userName, String token, String tokenSecret);
+        public void success(String id, String userName, String token, String tokenSecret);
 
         public void failure(String errorMessage);
     }
@@ -155,7 +155,7 @@ public class TwitterOAuthDialog {
             try {
                 AccessToken accessToken = mTwitter.getOAuthAccessToken(mRequestToken, oauth_verifier);
                 if (mOnTwitterOAuth != null) {
-                    mOnTwitterOAuth.success(accessToken.getUserId(), accessToken.getScreenName(), accessToken.getToken(), accessToken.getTokenSecret());
+                    mOnTwitterOAuth.success(accessToken.getUserId()+"", accessToken.getScreenName(), accessToken.getToken(), accessToken.getTokenSecret());
                 }
             } catch (Exception e) {
                 if (mOnTwitterOAuth != null) {
